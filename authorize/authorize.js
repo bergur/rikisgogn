@@ -3,7 +3,7 @@ const getToken = require('./getToken')
 function makeAuthorize (redisClient, logger) {
   return function authorize () {
     return (req, res, next) => {
-      const token = getToken(req.headers.authorization)
+      const token = getToken(req.headers)
 
       if (token) {
         redisClient.get(token, (err, reply) => {

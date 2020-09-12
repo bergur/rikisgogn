@@ -3,6 +3,20 @@ function makeComposition (pgPool, redisClient, logger) {
   const makeAuthorize = require('../authorize/authorize')
   const authorize = makeAuthorize(redisClient, logger)
 
+  // Users
+  const makeSelectUsers = require('../repo/users/select')
+  const selectUsers = makeSelectUsers(pgPool)
+
+  // User
+  const makeUserRoute = require('../routes/user')
+  const userRouter = makeUserRoute(authorize)
+
+  // Login
+  const makeLogin = require('../authorize/login')
+  const makeLoginRouter = require('../routes/login.js')
+  const login = makeLogin(selectUsers, redisClient)
+  const loginRouter = makeLoginRouter(login)
+
   // Unions
   const makeSelectUnions = require('../repo/unions/select')
   const makeUnionsRouter = require('../routes/unions')
@@ -16,6 +30,8 @@ function makeComposition (pgPool, redisClient, logger) {
   const averageSalariesyRouter = makeAverageSalariesRouter(authorize, selectAverageSalaries)
 
   return {
+    '/login': loginRouter,
+    '/user': userRouter,
     '/unions': unionsRouter,
     '/averagesalaries': averageSalariesyRouter
   }
