@@ -1,25 +1,22 @@
 {
-  "name": "fjarmalaraduneytid",
+  "name": "rikisgogn",
   "version": "1.0.1",
-  "description": "API fyrir fjármálaráðuneytið",
+  "description": "API fyrir gögn fyrir stjórnarráðið",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js",
-    "build": "parcel build ./src/index.html",
-    "serve": "parcel ./src/index.html",
-    "dev": "parcel watch ./src/index.html",
+    "start": "node server.js",    
     "lint": "eslint . --ext .js,.vue --fix"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bergur/fjarmalaraduneytid.git"
+    "url": "git+https://github.com/bergur/rikisgogn.git"
   },
   "author": "Bergur Hallgrímsson",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/bergur/fjarmalaraduneytid/issues"
+    "url": "https://github.com/bergur/rikisgogn/issues"
   },
-  "homepage": "https://github.com/bergur/fjarmalaraduneytid#readme",
+  "homepage": "https://github.com/bergur/rikisgogn#readme",
   "dependencies": {
     "compression": "^1.7.4",
     "cors": "^2.8.5",
