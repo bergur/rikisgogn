@@ -1,7 +1,7 @@
 const express = require('express')
 
 function makeAverageSalariesRouter (authorize, select) {
-  const router = new express.Router()
+  const router = express.Router()
 
   router.get('/', authorize(), (req, res, next) => {
     select(req.query)

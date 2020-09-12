@@ -3,6 +3,8 @@ function corsOptions (req, callback) {
     origin: req.user && req.user.origin
   }
 
+  console.log(options)
+
   callback(null, options)
 }
 

@@ -1,7 +1,7 @@
 
 const { toOrdinal } = require('pg-parameterize')
 
-function makeSelectUsers (db) {
+function makeSelectUnions (db) {
   return function selectUsers (options) {
     const opt = options || {}
     const params = []
@@ -18,7 +18,7 @@ function makeSelectUsers (db) {
 
     if (opt.id) {
       sql += ' AND id = ?'
-      params.push(opt.username)
+      params.push(opt.id)
     }
 
     return db
@@ -27,4 +27,4 @@ function makeSelectUsers (db) {
   }
 }
 
-module.exports = makeSelectUsers
+module.exports = makeSelectUnions
