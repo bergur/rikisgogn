@@ -3,7 +3,6 @@ const getToken = require('./getToken')
 function makeAuthorize (redisClient, logger) {
   return function authorize () {
     return (req, res, next) => {
-      console.log(req.headers.authorization)
       const token = getToken(req.headers.authorization)
 
       if (token) {

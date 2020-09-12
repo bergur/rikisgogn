@@ -1,9 +1,9 @@
 const express = require('express')
 
-function makeAverageSalariesRouter (select) {
+function makeAverageSalariesRouter (authorize, select) {
   const router = new express.Router()
 
-  router.get('/', (req, res, next) => {
+  router.get('/', authorize(), (req, res, next) => {
     select(req.query)
       .then(res.json.bind(res))
       .catch(next)

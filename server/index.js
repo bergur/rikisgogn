@@ -27,14 +27,14 @@ const selectUnions = makeSelectUnions(pgPool)
 const unionsRouter = makeUnionsRouter(selectUnions)
 
 const selectAverageSalaries = makeSelectAverageSalaries(pgPool)
-const averageSalariesyRouter = makeAverageSalariesRouter(selectAverageSalaries)
+const averageSalariesyRouter = makeAverageSalariesRouter(authorize, selectAverageSalaries)
 
-const app = createService(corsOptions)
-
-app.use('/unions', unionsRouter)
-app.use('/averagesalaries', authorize(), averageSalariesyRouter)
+const routes = {
+  '/unions': unionsRouter,
+  '/averagesalaries': averageSalariesyRouter
+}
 
 const port = process.env.PORT || 3001
-app.listen(port, () => {
+createService(authorize, corsOptions, routes).listen(port, () => {
   logger.info('Server starting', { port })
 })
