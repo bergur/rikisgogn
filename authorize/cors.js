@@ -1,11 +1,10 @@
-function corsOptions (req, callback) {
-  const options = {
-    origin: req.user && req.user.origin
+function corsOptions () {
+  return {
+    origin: (origin, callback) => {
+      callback(null, origin)
+    },
+    credentials: true
   }
-
-  console.log(options)
-
-  callback(null, options)
 }
 
 module.exports = corsOptions

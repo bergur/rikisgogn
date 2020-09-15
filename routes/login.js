@@ -4,9 +4,12 @@ function makeLoginRouter (login) {
   const router = express.Router()
 
   router.post('/', (req, res, next) => {
-    console.log(req.body)
     login(req.body.email, req.body.password)
-      .then(res.json.bind(res))
+      .then(user => {
+        res
+          .cookie('RIKISGOGN_TOKEN', user.token)
+          .send(user)
+      })
       .catch(next)
   })
 

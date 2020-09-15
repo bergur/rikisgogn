@@ -3,7 +3,7 @@ const parseCookie = require('cookie').parse
 function getToken (headers) {
   let token
   if (headers.cookie) {
-    token = parseCookie(headers.cookie).RIKISGOGN
+    token = parseCookie(headers.cookie).RIKISGOGN_TOKEN
   }
 
   if (headers.authorization) {
