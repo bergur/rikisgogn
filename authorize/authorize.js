@@ -4,6 +4,7 @@ function makeAuthorize (redisClient, logger) {
   return function authorize () {
     return (req, res, next) => {
       const token = getToken(req.headers)
+      logger('authorize token', { token })
 
       if (token) {
         redisClient.get(token, (err, reply) => {
@@ -18,6 +19,7 @@ function makeAuthorize (redisClient, logger) {
           }
 
           req.user = JSON.parse(reply)
+          console.log('authorize success', { user })
           return next()
         })
       } else {

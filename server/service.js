@@ -6,7 +6,7 @@ const helmet = require('helmet')
 const cors = require('cors')
 const enforceHttps = require('express-sslify').HTTPS
 
-function createService (corsOptions, routes) {
+function createService (corsOptions, routes, logger) {
   const app = express()
 
   app.use(bodyParser.json({ limit: '40mb' }))
@@ -20,7 +20,7 @@ function createService (corsOptions, routes) {
     app.use(helmet())
   }
 
-  app.use(cors(corsOptions()))
+  app.use(cors(corsOptions(logger)))
 
   Object.entries(routes).forEach(([path, router]) => {
     app.use(path, router)

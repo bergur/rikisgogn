@@ -21,6 +21,6 @@ const redisClient = redis.createClient({
 const routes = makeComposition(pgPool, redisClient, logger)
 
 const port = process.env.PORT || 3001
-createService(corsOptions, routes).listen(port, () => {
+createService(corsOptions, routes, logger).listen(port, () => {
   logger.info('Server starting', { port })
 })
