@@ -1,11 +1,14 @@
 function makeComposition (pgPool, redisClient, logger) {
   // Auth
   const makeAuthorize = require('../authorize/authorize')
+  const onlyAdmin = require('../authorize/onlyAdmin')
   const authorize = makeAuthorize(redisClient, logger)
 
   // Users
   const makeSelectUsers = require('../repo/users/select')
+  const makeUsersRoute = require('../routes/users')
   const selectUsers = makeSelectUsers(pgPool)
+  const usersRouter = makeUsersRoute(authorize, onlyAdmin, selectUsers)
 
   // User
   const makeUserRoute = require('../routes/user')
@@ -32,6 +35,7 @@ function makeComposition (pgPool, redisClient, logger) {
   return {
     '/login': loginRouter,
     '/user': userRouter,
+    '/users': usersRouter,
     '/unions': unionsRouter,
     '/averagesalaries': averageSalariesyRouter
   }

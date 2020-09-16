@@ -4,7 +4,7 @@
   "description": "API fyrir gögn fyrir stjórnarráðið",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "node server/index.js",
     "lint": "eslint . --ext .js,.vue --fix"
   },
   "repository": {
