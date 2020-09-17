@@ -5,6 +5,7 @@ const bodyParser = require('body-parser')
 const helmet = require('helmet')
 const cors = require('cors')
 const enforceHttps = require('express-sslify').HTTPS
+const corsOrigin = require('../authorize/corsOrigin')
 
 function createService (corsOptions, routes, logger) {
   const app = express()
@@ -20,7 +21,10 @@ function createService (corsOptions, routes, logger) {
     app.use(helmet())
   }
 
-  app.use(cors(corsOptions(logger)))
+  app.use(cors({
+    origin: corsOrigin(),
+    credentials: true
+  }))
 
   Object.entries(routes).forEach(([path, router]) => {
     app.use(path, router)
